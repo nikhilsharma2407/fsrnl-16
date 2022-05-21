@@ -17,3 +17,5 @@ git stash pop (remove the stash)
 ------------------git remote/github------------------------
 git push
 git pull
+
+git reset <reference> ---------- HEAD^(go back one step from current) HEAD~3(go back 3 steps from current);
