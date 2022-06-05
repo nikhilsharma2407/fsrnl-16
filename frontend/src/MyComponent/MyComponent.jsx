@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UsersClass from '../Users/UsersClass';
 import "./MyComponent.css"
 
 export default class MyComponent extends Component {
@@ -11,6 +12,8 @@ export default class MyComponent extends Component {
     }
 
   render() {
+      console.log(this.props);
+      const {name,email} = this.props;
     //   console.log("render");
     const clickHandler = ()=>{
         const {name} = this.state;
@@ -35,10 +38,14 @@ export default class MyComponent extends Component {
     const {showLabel} = this.state
     return (
     <>
+        <h1>props - {name} {email}</h1>
       {showLabel?<h1>MyComponent </h1>:null}
       <input className='input-style' type="text" onChange={changeHandler} />
       <button onClick={clickHandler}>Click me</button>
       <button onClick={toggleVisibility}>{showLabel?"Hide Label":"Show Label"}</button>
+      <hr />
+      {/* {showLabel?<UsersClass name = {name}  email = "nikhil@gmail.com"/>:null} */}
+
       </>
     )
   }
