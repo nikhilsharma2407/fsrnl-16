@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UsersClass from '../Users/UsersClass';
+import UsersClass from '../Users-test/UsersClass';
 import "./MyComponent.css"
 
 export default class MyComponent extends Component {

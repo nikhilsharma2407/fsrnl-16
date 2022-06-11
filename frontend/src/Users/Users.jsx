@@ -1,54 +1,33 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap';
+import User from '../User/User';
+
+function Users() {
+    const [users, setusers] = useState([]);
 
 
-
-function Users(props) {
-    // const [first,second] = [1,2];
-    const [users, setUsers] = useState([]);
-    const [userId, setUserID] = useState("1");
-    const BASE_URL = "https://jsonplaceholder.typicode.com/users/";
-
-    // Mounted -> empty dependency arrray
+    const TOKEN = "623f19872934031e5b0d8089";
+    const url = 'https://dummyapi.io/data/v1/user?limit=10';
+    const headers = {
+        'app-id': TOKEN
+    }
     useEffect(() => {
-        (async ()=>{
-            console.log("mounted");
-            const data = await (await axios.get(BASE_URL)).data;
+        (async () => {
+            const { data } = await (await axios.get(url, { headers })).data;
             console.log(data);
-            setUsers(data); 
-        })();
-        // componentWillUnmount
-        return ()=>{
-            console.log("unmount hook");
-        }
-    }, []);
+            setusers(data);
+        })()
+        document.title = "Users"
+    }, [])
 
-    
-    // did Update lifecycle hook 
-    useEffect(() => {
-        (async ()=>{
-            console.log("updated");
-            const url = BASE_URL+userId;
-            const userData = await (await axios.get(url)).data;
-            console.log({userData});
-        })();
-    }, [userId])
-    
-
-    console.log("render");
-    // console.log(props);
-    // console.log(users);
-    // console.log(userID);
     return (
-        <>
-            <div>props - {props.name} {props.email}</div>
-            <input type="number" min="1" max="10"
-                onChange={e => setUserID(e.target.value)} />
-            <h1>user id - {userId}</h1>
-            <div>Users</div>
-            <button onClick={e=>setUsers([])}>Update Users</button>
-        </>
-    )
+        <Container fluid>
+            <Row>
+                {users.map(user => <User key={user.id} user={user} />)}
+            </Row>
+        </Container>
+    );
 }
 
 export default Users

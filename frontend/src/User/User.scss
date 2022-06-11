@@ -1,0 +1,16 @@
+.user{
+    margin: 5px;
+    img{
+        height: 100px;
+    }
+    .data{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-left: 10px;
+        flex-basis: 200px;
+        &__button{
+            // flex: 1;
+        }
+    }
+}

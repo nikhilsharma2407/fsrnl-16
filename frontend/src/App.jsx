@@ -9,20 +9,24 @@ import {
   Link,
 } from "react-router-dom";
 
-import UsersClass from './Users/UsersClass';
+import UsersClass from './Users-test/UsersClass';
+import MyNavBar from './MyNavbar';
 import Users from './Users/Users';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Flexbox from './Flexbox/Flexbox';
 
 function App() {
   const name = "Nikhil Sharma"
   return (
     <BrowserRouter>
-      <div >
+    <MyNavBar/>
+      {/* <div >
         <h1>Router Link</h1>
         <Link to="/home">Home</Link>
         <Link to="/users">Users</Link>
         <Link to="/usersClass">UsersClass</Link>
-      </div>
-    
+      </div> */}
+
       {/* <div >
         <h1>Anchor</h1>
         <a href="/">Home</a>
@@ -31,7 +35,8 @@ function App() {
 
       <Routes>
         <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
-        <Route path='/users' element={<Users name={name} email="nikhil@gmail.com" />} />
+        <Route path='/flex' element={<Flexbox />} />
+        <Route path='/users' element={<Users />} />
         <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
       </Routes>
     </BrowserRouter>
