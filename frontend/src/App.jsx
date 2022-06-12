@@ -14,6 +14,7 @@ import MyNavBar from './MyNavbar';
 import Users from './Users/Users';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Flexbox from './Flexbox/Flexbox';
+import Signup from './Signup/Signup.jsx';
 
 function App() {
   const name = "Nikhil Sharma"
@@ -37,6 +38,7 @@ function App() {
         <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
         <Route path='/flex' element={<Flexbox />} />
         <Route path='/users' element={<Users />} />
+        <Route path='/signup' element={<Signup />} />
         <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
       </Routes>
     </BrowserRouter>
