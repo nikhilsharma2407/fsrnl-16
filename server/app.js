@@ -1,11 +1,11 @@
 const express  = require('express');
 const app = express();
 
+const db = require("./dbConnection");
 const router = require("./routes/route");
 const userRouter = require("./routes/userRouter");
 const errLogger = require('./utils/errLogger');
 const reqLogger = require("./utils/requestLogger");
-
 
 // used for parsing the body
 app.use(express.json());

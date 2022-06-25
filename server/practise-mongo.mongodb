@@ -131,3 +131,6 @@ db.inventory.updateOne({},{
 
 
 db.inventory.find({},{_id:0});
+
+db.users.drop();
+db.users.find();

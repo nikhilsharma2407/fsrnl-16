@@ -3,3 +3,16 @@ path doesn't exist /api/user/123 POST
 path doesn't exist /api/flights/DEL-BLR POST
 path doesn't exist /api/flights/ POST
 path doesn't exist /api/flights/DEL-BLR POST
+User doesn't exist /user/login POST
+Incorrect Password!!! /user/login POST
+E11000 duplicate key error collection: test.users index: username_1 dup key: { username: "nikhil101" } /user/signup POST
+E11000 duplicate key error collection: test.users index: username_1 dup key: { username: "nikhil101" } /user/signup POST
+user nikhil101 already exists!!! /user/signup POST
+user nikhil101 already exists!!! /user/signup POST
+User validation failed: password: Password should be atleast 8 characters long /user/signup POST
+User validation failed: password: Password should be atleast 8 characters long /user/signup POST
+user nikhil102 already exists!!! /user/signup POST
+User validation failed: name: name is mandatory!!! /user/signup POST
+User validation failed: username: username is mandatory!!!, name: name is mandatory!!! /user/signup POST
+Incorrect Password!!! /user/login POST
+UserModel.findOne(...).toObject is not a function /user/login POST
