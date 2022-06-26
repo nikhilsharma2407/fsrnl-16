@@ -16,3 +16,22 @@ User validation failed: name: name is mandatory!!! /user/signup POST
 User validation failed: username: username is mandatory!!!, name: name is mandatory!!! /user/signup POST
 Incorrect Password!!! /user/login POST
 UserModel.findOne(...).toObject is not a function /user/login POST
+Incorrect Password!!! /user/login POST
+Class constructor ResponseCreator cannot be invoked without 'new' /user/login POST
+staus is not defined /user/login POST
+user nikhil104 already exists!!! /user/signup POST
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt must be provided /admin/getdata GET
+jwt expired /admin/getdata GET
+UserModel.findOne is not a function /admin/getdata GET
+jwt expired /admin/getdata GET
+UserModel.searchUser is not a function /admin/getdata GET
+UserModel.searchUser is not a function /admin/getdata GET
+Class constructor ResponseCreator cannot be invoked without 'new' /admin/getdata GET
+jwt expired /admin/getdata GET
+jwt expired /admin/getdata GET
+jwt expired /admin/getdata GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
