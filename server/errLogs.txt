@@ -35,3 +35,18 @@ jwt expired /admin/getdata GET
 jwt expired /user/login GET
 jwt expired /user/login GET
 jwt expired /user/login GET
+Operation `users.insertOne()` buffering timed out after 10000ms /user/signup POST
+user nikhil123 already exists!!! /user/signup POST
+user nikhil123 already exists!!! /user/signup POST
+user nikhil123 already exists!!! /user/signup POST
+user nikhil123 already exists!!! /user/signup POST
+user nikhil123 already exists!!! /user/signup POST
+jwt expired /user/login GET
+jwt must be provided /user/addFriend POST
+jwt must be provided /user/addFriend POST
+jwt expired /user/addFriend POST
+jwt expired /user/addFriend POST
+jwt expired /user/login GET
+jwt expired /user/addFriend POST
+jwt expired /user/addFriend POST
+jwt expired /user/login GET

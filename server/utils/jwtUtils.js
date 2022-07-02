@@ -1,6 +1,6 @@
 const {sign,decode,verify} = require("jsonwebtoken");
 const generateToken = (data)=>{
-    const token = sign(data,"test",{expiresIn:"10s"});
+    const token = sign(data,"test",{expiresIn:"15m"});
     console.log(token);
     return token
 }

@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import MyComponent from './MyComponent/MyComponent';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -15,8 +15,25 @@ import Users from './Users/Users';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Flexbox from './Flexbox/Flexbox';
 import Signup from './Signup/Signup.jsx';
+import Login from './Login/Login';
+import { loginCookieUtil } from './apiUtil';
 
 function App() {
+  useEffect(() => {
+    (async()=>{
+      try {
+        const response = await (await loginCookieUtil()).data;
+        console.log(response);
+        if(response.status){
+          alert("logged in successfully with cookie!!!")
+        }
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    })()
+    
+  }, [])
+
   const name = "Nikhil Sharma"
   return (
     <BrowserRouter>
@@ -39,6 +56,7 @@ function App() {
         <Route path='/flex' element={<Flexbox />} />
         <Route path='/users' element={<Users />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
       </Routes>
     </BrowserRouter>

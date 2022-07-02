@@ -1,9 +1,23 @@
 import React from 'react'
 import { Card, Button, Col } from 'react-bootstrap';
+import { addFriendUtil } from '../apiUtil';
 import "./User.scss"
 function User(props) {
-    const { user: { picture, title, firstName, lastName } } = props;
+    const { user: { id,picture, title, firstName, lastName } } = props;
     // const { picture, title, firstName, lastName } = user
+
+    const addFriend = async()=>{
+        try {
+            const payload = {id,friendName:firstName};
+            const data = await (await addFriendUtil(payload)).data;
+            console.log(data);    
+        } catch (error) {
+            const message = error.response.data;
+            console.log(message);
+        }
+        
+    }
+
     return (
         <Col sm="12" md="6" lg= "4">
         <Card className="user">
@@ -11,7 +25,7 @@ function User(props) {
                 <img src={picture} />
                 <div className = "data">
                     <strong>{title.toUpperCase()} {firstName} {lastName}</strong>
-                    <Button className = "data__button" variant="outline-primary">Add Friend</Button>
+                    <Button className = "data__button" variant="outline-primary" onClick = {addFriend}>Add Friend</Button>
                 </div>
             </Card.Body>
         </Card>

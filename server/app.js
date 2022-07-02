@@ -9,7 +9,15 @@ const errLogger = require('./utils/errLogger');
 const reqLogger = require("./utils/requestLogger");
 const authMiddleware  = require('./models/userModel').authMiddleware;
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 // used for parsing the body
+
+
+const corsConfig = {
+    origin: 'http://localhost:3000',
+    credentials:true
+};
+app.use(cors(corsConfig))
 app.use(express.json());
 app.use(cookieParser())
 // used for logging all requests

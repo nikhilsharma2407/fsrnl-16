@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
+import { signupUtil } from '../apiUtil';
 import "./Signup.scss"
 
 function Signup() {
@@ -13,6 +14,10 @@ function Signup() {
   })
 
   const [valid, setValid] = useState(false);
+
+  const [name, setname] = useState("");
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
 
   useEffect(() => {
     const isValid = Object.values(validation).every(Boolean);
@@ -30,6 +35,21 @@ function Signup() {
     setValidation({
       lowercase, uppercase, number, symbol, length
     })
+  };
+
+
+  const  signup = async(e)=>{
+    try {
+      e.preventDefault();
+      const payload = {name,username,password};
+      console.log(payload);
+      const userdata = await (await signupUtil(payload)).data;
+      console.log(userdata);  
+    } catch (error) {
+      const {data} = error.response;
+      console.log(data);
+    }
+    
   }
 
   const { lowercase, uppercase, number, symbol, length } = validation;
@@ -40,18 +60,24 @@ function Signup() {
       <Card.Body>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter email" onKeyUp = {e=>setname(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Usernam</Form.Label>
+            <Form.Control type="text" placeholder="Enter email" onKeyUp = {e=>setusername(e.target.value)} />
+
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onKeyUp={e => validate(e)} />
+            <Form.Control type="password" placeholder="Password" onKeyUp={e => {
+              validate(e);
+              setpassword(e.target.value);
+              }} />
           </Form.Group>
-          <Button variant="outline-primary" type="submit" disabled={!valid}>
+          <Button variant="outline-primary" type="submit" disabled={!valid} onClick = {signup}>
             Submit
           </Button>
         </Form>

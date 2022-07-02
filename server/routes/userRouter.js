@@ -8,5 +8,6 @@ router.get('/',(req,res,next)=>{
 router.post('/signup',UserModel.signup)
 router.post('/login',UserModel.login)
 router.get('/login',UserModel.loginWithCookie)
+router.post('/addFriend',UserModel.authMiddleware,UserModel.addFriend)
 
 module.exports = router;

@@ -19,6 +19,9 @@ function MyNavBar() {
             <Nav.Link as={Link}  to='/users' >Users</Nav.Link>
           </Nav>
           <Nav className = "ms-auto">
+            <Nav.Link as = {Link} to='/login'>Login</Nav.Link>
+          </Nav>
+          <Nav className = "ms-auto">
             <Nav.Link as = {Link} to='/signup'>Signup</Nav.Link>
           </Nav>
           <Form className="d-flex">

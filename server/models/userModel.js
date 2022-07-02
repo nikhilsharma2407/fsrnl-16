@@ -21,7 +21,8 @@ const userSchema = new Schema({
             message: props => `Password should be atleast 8 characters long`
         },
         required: [true, "Password is mandatory!!!"]
-    }
+    },
+    friendList:[String]
 });
 
 userSchema.statics.signup = async (req, res, next) => {
@@ -92,6 +93,7 @@ userSchema.statics.authMiddleware = async (req, res, next)=>{
             if (userData) {
                 res.status(200);
                 console.log(userData);
+                req.user = userData;
                 next();
             } else {
                 ErrorCreator("User doesn't exist", 404);
@@ -125,6 +127,21 @@ userSchema.statics.loginWithCookie = async (req, res, next) => {
     catch (error) {
         next(error);
     }
+}
+
+userSchema.statics.addFriend = async (req,res,next)=>{
+    try {
+        const {id,friendName} = req.body;
+        const {username} = req.user;
+        const data = await UserModel.updateOne({username},{$push:{friendList:id}});
+        console.log(data);
+        if(data.modifiedCount){
+            res.send(new ResponseCreator(200, `${friendName} added to your Friends!!!`));
+        }    
+    } catch (error) {
+        next(error);
+    }
+    
 }
 
 const UserModel = mongoose.model('User', userSchema);
