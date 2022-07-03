@@ -1,6 +1,8 @@
 import React, {useEffect, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux';
 import { loginCookieUtil, loginUtil} from '../apiUtil';
+import { loginAction } from '../reducers/userReducer';
 import "./Login.scss"
 
 function Login() {
@@ -8,24 +10,22 @@ function Login() {
   
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  const [isLoggedIn, setisLoggedIn] = useState(false)
   const [valid, setvalid] = useState(false);
   
+  
+  const dispatch = useDispatch();
+  const state = useSelector(state => state.user)
 
   useEffect(() => {
     setvalid(username.length && password.length);
   }, [username,password])
   
   const  login = async(e)=>{
-    try {
       e.preventDefault();
       const payload = {username,password};
       console.log(payload);
-      const userdata = await (await loginUtil(payload)).data;
-      console.log(userdata);  
-    } catch (error) {
-      const {data} = error.response;
-      console.log(data);
-    }
+      dispatch(loginAction(payload));
     
   }
 

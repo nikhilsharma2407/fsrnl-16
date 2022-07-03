@@ -50,3 +50,25 @@ jwt expired /user/login GET
 jwt expired /user/addFriend POST
 jwt expired /user/addFriend POST
 jwt expired /user/login GET
+jwt must be provided /user/login GET
+user nikhil123 already exists!!! /user/signup POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt must be provided /user/removeFriend POST
+jwt must be provided /user/login GET

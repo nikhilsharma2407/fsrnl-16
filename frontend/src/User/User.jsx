@@ -1,8 +1,12 @@
 import React from 'react'
 import { Card, Button, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { addFriendUtil } from '../apiUtil';
 import "./User.scss"
 function User(props) {
+
+    const {friendList } = useSelector(state => state.user);
+
     const { user: { id,picture, title, firstName, lastName } } = props;
     // const { picture, title, firstName, lastName } = user
 
@@ -25,7 +29,9 @@ function User(props) {
                 <img src={picture} />
                 <div className = "data">
                     <strong>{title.toUpperCase()} {firstName} {lastName}</strong>
+                    {friendList.includes(id)?<Button className = "data__button" variant="outline-danger" onClick = {addFriend}>Remove Friend</Button>:
                     <Button className = "data__button" variant="outline-primary" onClick = {addFriend}>Add Friend</Button>
+                    }
                 </div>
             </Card.Body>
         </Card>

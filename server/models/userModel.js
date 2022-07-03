@@ -135,9 +135,35 @@ userSchema.statics.addFriend = async (req,res,next)=>{
         const {username} = req.user;
         const data = await UserModel.updateOne({username},{$push:{friendList:id}});
         console.log(data);
+        res.status(200);
         if(data.modifiedCount){
             res.send(new ResponseCreator(200, `${friendName} added to your Friends!!!`));
         }    
+    } catch (error) {
+        next(error);
+    }
+    
+}
+userSchema.statics.removeFriend = async (req,res,next)=>{
+    try {
+        const {id,friendName} = req.body;
+        const {username} = req.user;
+        const data = await UserModel.updateOne({username},{$pull:{friendList:id}});
+        console.log(data);
+        res.status(200)
+        if(data.modifiedCount){
+            res.send(new ResponseCreator(200, `You're no longer friends with ${friendName}`));
+        }    
+    } catch (error) {
+        next(error);
+    }
+    
+}
+userSchema.statics.logout = async (req,res,next)=>{
+    try {
+        res.clearCookie('token');
+        res.status(200);
+        res.send(ResponseCreator(200,'Logged out successfully!!!'));
     } catch (error) {
         next(error);
     }

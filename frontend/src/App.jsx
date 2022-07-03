@@ -17,8 +17,16 @@ import Flexbox from './Flexbox/Flexbox';
 import Signup from './Signup/Signup.jsx';
 import Login from './Login/Login';
 import { loginCookieUtil } from './apiUtil';
+import Counter from './Counter/Counter';
+import { applyMiddleware, createStore } from 'redux';
+import countReducer from './reducers/CountReducer';
+import { Provider } from 'react-redux';
+import thunk from "redux-thunk";
+import rootReducer from './reducers/rootReducer';
 
 function App() {
+
+  const store = createStore(rootReducer,applyMiddleware(thunk))
   useEffect(() => {
     (async()=>{
       try {
@@ -36,30 +44,33 @@ function App() {
 
   const name = "Nikhil Sharma"
   return (
-    <BrowserRouter>
-    <MyNavBar/>
-      {/* <div >
-        <h1>Router Link</h1>
-        <Link to="/home">Home</Link>
-        <Link to="/users">Users</Link>
-        <Link to="/usersClass">UsersClass</Link>
-      </div> */}
+    <Provider store = {store}>
+      <BrowserRouter>
+      <MyNavBar/>
+        {/* <div >
+          <h1>Router Link</h1>
+          <Link to="/home">Home</Link>
+          <Link to="/users">Users</Link>
+          <Link to="/usersClass">UsersClass</Link>
+        </div> */}
 
-      {/* <div >
-        <h1>Anchor</h1>
-        <a href="/">Home</a>
-        <a href="/users">Users</a>
-      </div> */}
+        {/* <div >
+          <h1>Anchor</h1>
+          <a href="/">Home</a>
+          <a href="/users">Users</a>
+        </div> */}
 
-      <Routes>
-        <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
-        <Route path='/flex' element={<Flexbox />} />
-        <Route path='/users' element={<Users />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
+          <Route path='/flex' element={<Flexbox />} />
+          <Route path='/users' element={<Users />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
+          <Route path='/counter' element={<Counter/>} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
