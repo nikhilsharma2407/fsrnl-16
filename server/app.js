@@ -32,7 +32,7 @@ app.use('/user',userRouter)
 app.use('/admin',authMiddleware,adminRouter)
 
 app.use(errLogger)
-app.listen(4000,()=>{
+app.listen(process.env.port,()=>{
     console.clear()
     console.log("server running on port 4000");
 })
