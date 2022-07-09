@@ -1,6 +1,7 @@
 const express  = require('express');
 const app = express();
-
+const dotenv = require("dotenv");
+dotenv.config();
 const db = require("./dbConnection");
 const router = require("./routes/route");
 const userRouter = require("./routes/userRouter");
@@ -11,7 +12,6 @@ const authMiddleware  = require('./models/userModel').authMiddleware;
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 // used for parsing the body
-
 
 const corsConfig = {
     origin: 'http://localhost:3000',
@@ -29,7 +29,7 @@ app.use('/user',userRouter)
 app.use('/admin',authMiddleware,adminRouter)
 
 app.use(errLogger)
-app.listen(4000,()=>{
+app.listen(process.env.PORT,()=>{
     console.clear()
     console.log("server running on port 4000");
 })

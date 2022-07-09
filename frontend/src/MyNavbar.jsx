@@ -4,11 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutAction } from './reducers/userReducer';
 
 function MyNavBar() {
-  const {isLoggedIn} = useSelector(state => state.user)
+  const {user} = useSelector(state => state);
+  const {isLoggedIn} = user;
+  const dispatch = useDispatch()
 
   return (
     <Navbar variant="dark" bg="dark" expand="sm">
@@ -25,7 +28,7 @@ function MyNavBar() {
             <Nav.Link as = {Link} to='/counter'>Counter</Nav.Link>
           </Nav>
           {isLoggedIn?<Nav className = "ms-auto">
-            <Nav.Link as = {Button} variant= "outline">Logout</Nav.Link>
+            <Nav.Link as = {Button} variant= "outline" onClick = {e=>dispatch(logoutAction())}>Logout</Nav.Link>
           </Nav>:(<><Nav className = "ms-auto">
             <Nav.Link as = {Link} to='/login'>Login</Nav.Link>
           </Nav>

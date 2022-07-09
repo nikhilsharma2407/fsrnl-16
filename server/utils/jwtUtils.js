@@ -1,12 +1,15 @@
 const {sign,decode,verify} = require("jsonwebtoken");
+
+const MySecretKey = process.env.MySecretKey
+
 const generateToken = (data)=>{
-    const token = sign(data,"test",{expiresIn:"15m"});
+    const token = sign(data,MySecretKey,{expiresIn:"15m"});
     console.log(token);
     return token
 }
 
 const verifyToken = (token)=>{
-    return verify(token,"test");
+    return verify(token,MySecretKey);
 }
 
 const getTokenFromHeaders = (req)=>{

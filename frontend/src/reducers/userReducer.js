@@ -1,4 +1,4 @@
-import { loginUtil } from "../apiUtil";
+import { loginUtil, logoutUtil } from "../apiUtil";
 
 const initialState = {
     isLoggedIn : false,
@@ -21,6 +21,9 @@ const loginActionCreator = payload=>{
     const userData = {message,username,name,friendList,isLoggedIn};
     return {type:USER_ACTIONS.LOGIN,payload:userData};
 }
+const logoutActionCreator = payload=>{
+    return {type:USER_ACTIONS.LOGOUT};
+}
 
 export const loginAction = (payload)=>{
     return async (dispatch)=>{
@@ -37,6 +40,21 @@ export const loginAction = (payload)=>{
         }
     }
 };
+export const logoutAction = ()=>{
+    return async (dispatch)=>{
+        try {
+            const data = await (await logoutUtil()).data;
+            if(data.status){
+                alert("Logged out successfully");
+                dispatch(logoutActionCreator());
+
+            };    
+        } catch (error) {
+            console.log(error);
+            alert("logout failed")
+        }
+    }
+};
 
 
 const userReducer = (state = initialState,action)=>{
@@ -45,6 +63,8 @@ const userReducer = (state = initialState,action)=>{
             const {payload} = action;
             console.log("loginaction",payload);
             return {...state,...payload}
+        case USER_ACTIONS.LOGOUT:
+            return initialState
     
         default:
             return state

@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const sendMail = require("../utils/emailUtils");
 const { generateToken, verifyToken, getTokenFromHeaders } = require("../utils/jwtUtils");
 const { Schema } = mongoose;
 const { generatePassword, verifyPassword } = require("../utils/passwordUtil");
-const { ResponseCreator } = require("../utils/responseHandler");
-
+const { ResponseCreator,ErrorCreator } = require("../utils/responseHandler");
+const nodemailer = require("nodemailer");
 const userSchema = new Schema({
     name: {
         type: String,
@@ -22,7 +23,8 @@ const userSchema = new Schema({
         },
         required: [true, "Password is mandatory!!!"]
     },
-    friendList:[String]
+    friendList:[String],
+    otp:Number
 });
 
 userSchema.statics.signup = async (req, res, next) => {
@@ -53,7 +55,7 @@ userSchema.statics.signup = async (req, res, next) => {
 userSchema.statics.login = async (req, res, next) => {
     const { username, password } = req.body;
     try {
-        const data = (await UserModel.findOne({ username }, { _id: 0, __v: 0 })).toObject();
+        const data = (await UserModel.findOne({ username }, { _id: 0, __v: 0 }))?.toObject();
         if (data) {
             console.log(data);
             const passwordMatch = await verifyPassword(password, data.password);
@@ -159,19 +161,63 @@ userSchema.statics.removeFriend = async (req,res,next)=>{
     }
     
 }
+
 userSchema.statics.logout = async (req,res,next)=>{
     try {
         res.clearCookie('token');
         res.status(200);
-        res.send(ResponseCreator(200,'Logged out successfully!!!'));
+        res.send(new ResponseCreator(200,'Logged out successfully!!!'));
     } catch (error) {
         next(error);
     }
     
 }
 
+userSchema.statics.generateOTP = async(req,res,next)=>{
+    try {
+        const otp = 100000 + Math.random()*900000|0;
+        const {username} = req.body;
+        const user = await UserModel.findOne({username});
+        console.log(user);
+        if(user !== undefined){
+            const data = await UserModel.updateOne({username},{$set:{otp}});
+            if(data.modifiedCount){
+                const info = await sendMail(otp);
+                res.send(new ResponseCreator(200,nodemailer.getTestMessageUrl(info)));
+            }
+        }else{
+            ErrorCreator("User doesn't exists",404);
+        }    
+    } catch (error) {
+        next(error);
+    }   
+};
+
+userSchema.statics.resetPassword = async(req,res,next)=>{
+    try {
+        const {username,otp,password:pwd} = req.body;
+        const password =  await generatePassword(pwd);
+        const user = await UserModel.findOne({username});
+        console.log(user);
+        if(user){
+            if(user.otp === otp){
+                const data = await UserModel.updateOne({username},{$set:{password,otp:null}});
+                if(data.modifiedCount){
+                    res.send(new ResponseCreator(200,`Password reset Successfully`));
+                }else{
+                    ErrorCreator("Passord reset Failed,Please try again",500);    
+                }
+            }else{
+                ErrorCreator("Invalid OTP!!!",403);
+            }
+        }else{
+            ErrorCreator("User doesn't exists",404);
+        }    
+    } catch (error) {
+        next(error);
+    }   
+};
+
 const UserModel = mongoose.model('User', userSchema);
-
-
 
 module.exports = UserModel;

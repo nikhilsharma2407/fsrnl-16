@@ -72,3 +72,18 @@ jwt expired /user/login GET
 jwt expired /user/login GET
 jwt must be provided /user/removeFriend POST
 jwt must be provided /user/login GET
+jwt must be provided /user/generateotp PATCH
+ErrorCreator is not defined /user/generateotp PATCH
+ErrorCreator is not defined /user/generateotp PATCH
+ErrorCreator is not defined /user/generateotp PATCH
+User doesn't exists /user/generateotp PATCH
+User doesn't exists /user/generateotp PATCH
+Cast to string failed for value "Promise { <pending> }" (type Promise) at path "password" /user/resetPassword PATCH
+Incorrect Password!!! /user/login POST
+nodemailer is not defined /user/generateotp PATCH
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/logout GET
