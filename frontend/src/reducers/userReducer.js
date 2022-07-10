@@ -1,11 +1,12 @@
-import { loginUtil, logoutUtil } from "../apiUtil";
+import { loginUtil, logoutUtil, loginCookieUtil } from "../apiUtil";
 
 const initialState = {
     isLoggedIn : false,
     username:'',
     name:'',
     friendList:[],
-    message : ''
+    message : '',
+    status:false
 }
 
 
@@ -17,8 +18,9 @@ const USER_ACTIONS = {
 };
 
 const loginActionCreator = payload=>{
-    const {status:isLoggedIn, message,data:{username,name,friendList}} = payload;
-    const userData = {message,username,name,friendList,isLoggedIn};
+    const {status, message,data:{username,name,friendList}} = payload;
+    const isLoggedIn = status;
+    const userData = {status,message,username,name,friendList,isLoggedIn};
     return {type:USER_ACTIONS.LOGIN,payload:userData};
 }
 const logoutActionCreator = payload=>{
@@ -29,6 +31,24 @@ export const loginAction = (payload)=>{
     return async (dispatch)=>{
         try {
             const userData = await (await loginUtil(payload)).data;
+            console.log('userData from response',userData);
+            if(userData.status){
+                console.log("userReducer",userData);
+                alert("Logged in successfully");
+                dispatch(loginActionCreator(userData));
+            };    
+        } catch (error) {
+            console.log(error);
+            alert("login failed")
+        }
+    }
+};
+export const loginWithCookieAction = (payload)=>{
+    return async (dispatch)=>{
+        try {
+            const userData = await (await loginCookieUtil()).data;
+            console.log('userData from response',userData);
+
             if(userData.status){
                 console.log("userReducer",userData);
                 alert("Logged in successfully");

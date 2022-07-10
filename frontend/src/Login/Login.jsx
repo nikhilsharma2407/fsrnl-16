@@ -1,58 +1,64 @@
-import React, {useEffect, useState } from 'react'
-import { Button, Card, Form } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Button, Card, Form, Container, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginCookieUtil, loginUtil} from '../apiUtil';
+import { loginCookieUtil, loginUtil } from '../apiUtil';
 import { loginAction } from '../reducers/userReducer';
 import "./Login.scss"
 
 function Login() {
 
-  
+
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [isLoggedIn, setisLoggedIn] = useState(false)
   const [valid, setvalid] = useState(false);
-  
-  
+
+
   const dispatch = useDispatch();
   const state = useSelector(state => state.user)
 
   useEffect(() => {
     setvalid(username.length && password.length);
-  }, [username,password])
-  
-  const  login = async(e)=>{
-      e.preventDefault();
-      const payload = {username,password};
-      console.log(payload);
-      dispatch(loginAction(payload));
-    
+  }, [username, password])
+
+  const login = async (e) => {
+    e.preventDefault();
+    const payload = { username, password };
+    console.log(payload);
+    dispatch(loginAction(payload));
+
   }
 
   return (
+    <Container>
+      <Row>
+        <Col lg = {{span:4,offset:4}} md = {{span:6,offset:3}} sm = {{span:10,offset:1}}>
+          <Card className='m-3 p-3 signup'>
+            <Card.Title>Signup</Card.Title>
+            <Card.Body>
+              <Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Usernam</Form.Label>
+                  <Form.Control type="text" placeholder="Enter email" onKeyUp={e => setusername(e.target.value)} />
 
-    <Card className='m-3 p-3 signup'>
-      <Card.Title>Signup</Card.Title>
-      <Card.Body>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Usernam</Form.Label>
-            <Form.Control type="text" placeholder="Enter email" onKeyUp = {e=>setusername(e.target.value)} />
+                </Form.Group>
 
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onKeyUp={e => {
-              setpassword(e.target.value);
-              }} />
-          </Form.Group>
-          <Button variant="outline-primary" type="submit" disabled={!valid} onClick = {login}>
-            Login
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" placeholder="Password" onKeyUp={e => {
+                    setpassword(e.target.value);
+                  }} />
+                </Form.Group>
+                <Button variant="outline-primary" type="submit" disabled={!valid} onClick={login}>
+                  Login
           </Button>
-        </Form>
-      </Card.Body>
-    </Card>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+
   )
 }
 

@@ -20,33 +20,40 @@ import { loginCookieUtil } from './apiUtil';
 import Counter from './Counter/Counter';
 import { applyMiddleware, createStore } from 'redux';
 import countReducer from './reducers/CountReducer';
-import { Provider } from 'react-redux';
-import thunk from "redux-thunk";
-import rootReducer from './reducers/rootReducer';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { loginWithCookieAction } from './reducers/userReducer';
+import ProtectedRoute from './ProtectedRoute';
+import Routing from './Routing';
+import MyToast from './MyToast';
 
 function App() {
 
-  const store = createStore(rootReducer,applyMiddleware(thunk))
+
+
+  const dispatch = useDispatch();
+  const {isLoggedIn,message,status} = useSelector(state=>state.user);
+
   useEffect(() => {
-    (async()=>{
-      try {
-        const response = await (await loginCookieUtil()).data;
-        console.log(response);
-        if(response.status){
-          alert("logged in successfully with cookie!!!")
-        }
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    })()
-    
+    // (async()=>{
+    //   try {
+    //     const response = await (await loginCookieUtil()).data;
+    //     console.log(response);
+    //     if(response.status){
+    //       alert("logged in successfully with cookie!!!")
+    //     }
+    //   } catch (error) {
+    //     console.log(error.response.data);
+    //   }
+    // })()
+    dispatch(loginWithCookieAction());
   }, [])
 
   const name = "Nikhil Sharma"
   return (
-    <Provider store = {store}>
+    
       <BrowserRouter>
       <MyNavBar/>
+      <MyToast status = {status} message = {message}/>
         {/* <div >
           <h1>Router Link</h1>
           <Link to="/home">Home</Link>
@@ -63,14 +70,19 @@ function App() {
         <Routes>
           <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
           <Route path='/flex' element={<Flexbox />} />
-          <Route path='/users' element={<Users />} />
+          {/* <Route path='/users' element={<Users />} /> */}
+          <Route path='/users' element={
+            <ProtectedRoute isLoggedIn = {isLoggedIn}>
+              <Users/>
+            </ProtectedRoute>
+          } />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
           <Route path='/counter' element={<Counter/>} />
+          <Route path='/router/:userId' element={<Routing/>} />
         </Routes>
       </BrowserRouter>
-    </Provider>
   );
 }
 

@@ -5,13 +5,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { logoutAction } from './reducers/userReducer';
 
 function MyNavBar() {
   const {user} = useSelector(state => state);
   const {isLoggedIn} = user;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [,setSearch] = useSearchParams();
 
   return (
     <Navbar variant="dark" bg="dark" expand="sm">
@@ -41,6 +42,7 @@ function MyNavBar() {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+                onChange = {(e=>setSearch({name:e.target.value}))}
             />
             <Button variant="outline-success">Search</Button>
           </Form>

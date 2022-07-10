@@ -87,3 +87,20 @@ jwt must be provided /user/login GET
 jwt must be provided /user/login GET
 jwt must be provided /user/login GET
 jwt must be provided /user/logout GET
+jwt must be provided /user/login GET
+jwt expired /user/addFriend POST
+jwt expired /user/addFriend POST
+jwt expired /user/addFriend POST
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET

@@ -3,7 +3,7 @@ import "./Flexbox.scss"
 
 function Flexbox() {
   return (
-    <div className='container'>
+    <div className='flex-box container'>
         <div className="flex-item">1</div>
         <div className="flex-item">2</div>
         <div className="flex-item">3</div>
