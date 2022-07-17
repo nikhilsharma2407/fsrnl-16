@@ -25,13 +25,18 @@ import { loginWithCookieAction } from './reducers/userReducer';
 import ProtectedRoute from './ProtectedRoute';
 import Routing from './Routing';
 import MyToast from './MyToast';
+import toolkitStore from "./store"
+import { Spinner } from 'react-bootstrap';
+import "./Counter/counter.scss"
+import UserProfile from './Counter/UserProfile/UserProfile';
 
 function App() {
 
 
 
   const dispatch = useDispatch();
-  const {isLoggedIn,userloading,loading,message,status} = useSelector(state=>state.user);
+  const user = useSelector(state=>state.user);
+  const {isLoggedIn,userloading,loading,message,status} = user;
   useEffect(() => {
     // (async()=>{
     //   try {
@@ -51,6 +56,7 @@ function App() {
   return (
     
       <BrowserRouter>
+      {loading?<Spinner className = "counter spinner" animation="border" />:null}
       <MyNavBar/>
       <MyToast status = {status} message = {message}/>
         {/* <div >
@@ -78,8 +84,18 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
-          <Route path='/counter' element={<Counter/>} />
+          <Route path='/counter' element={
+          <Provider store={toolkitStore}>
+            <Counter/>
+          </Provider>
+          } />
           <Route path='/router/:userId' element={<Routing/>} />
+
+          {userloading===false?<Route path='/profile' element={
+            <ProtectedRoute isLoggedIn = {isLoggedIn}>
+              <UserProfile user = {user}/>
+            </ProtectedRoute>
+          } />:null}
         </Routes>
       </BrowserRouter>
   );

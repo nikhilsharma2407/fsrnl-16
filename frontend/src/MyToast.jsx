@@ -20,7 +20,7 @@ function AlertDismissible(props) {
               dispatch(messageActionCreator(''));
           }, delay);
       return (
-        <Alert variant={status?'success':'danger'} onClose={() => setShow(false)} dismissible>
+        <Alert style={{position:'absolute',right:0,zIndex:5}} variant={status?'success':'danger'} onClose={() => dispatch(messageActionCreator(''))} dismissible>
           {message}
         </Alert>
       );

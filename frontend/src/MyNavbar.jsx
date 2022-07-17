@@ -29,6 +29,7 @@ function MyNavBar() {
             <Nav.Link as = {Link} to='/counter'>Counter</Nav.Link>
           </Nav>
           {isLoggedIn?<Nav className = "ms-auto">
+            <Nav.Link as = {Link}  to="/profile">Profile</Nav.Link>
             <Nav.Link as = {Button} variant= "outline" onClick = {e=>dispatch(logoutAction())}>Logout</Nav.Link>
           </Nav>:(<><Nav className = "ms-auto">
             <Nav.Link as = {Link} to='/login'>Login</Nav.Link>

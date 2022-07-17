@@ -1,24 +1,35 @@
 import { Button } from 'bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
+
 import React, { useState } from 'react'
-import {useDispatch,useSelector} from "react-redux";
-import { decrementAction, incrementAction,incrementValueAction, incrementValueAsync } from '../reducers/CountReducer';
+import { useDispatch, useSelector } from "react-redux";
+// import { decrementAction, incrementAction,incrementValueAction, incrementValueAsync } from '../reducers/CountReducer';
+import { decrementActionToolkit, incrementActionToolkit, incrementValueActionToolkit, fetchUserById } from './couterSlice';
+
+import "./counter.scss"
 
 function Counter() {
     // dont use state
     // const [count, setcount] = useState(0);
-    const state = useSelector(state=>state.count);
+    const { count, incrementValue,loading,user } = useSelector(state => state.count);
     const dispatch = useDispatch();
 
-    console.log(state);
-    const {count,incrementValue} = state;
+    const payload = {
+        title: 'test123',
+        body: 'dummy data',
+        userId: 1,
+    }
+    console.log("img data",user);
     return (
-        <div>
+        <>
+            {loading?<Spinner className = "counter spinner" animation="border" />:null};
             <h1>current count - {count}</h1>
-            <button onClick={e=>dispatch(incrementAction(incrementValue))}>Increment Count</button>
-            <button onClick={e=>dispatch(decrementAction())}>Decrement Count</button>
-            <button onClick={e=>dispatch(incrementValueAsync(incrementValue))}>Increment action async</button>
-            <input onChange={e=>dispatch(incrementValueAction(+e.target.value))} placeholder = "increment count by" type="number" />
-        </div>
+            <button onClick={e => dispatch(incrementActionToolkit(incrementValue))}>Increment Count</button>
+            <button onClick={e => dispatch(decrementActionToolkit())}>Decrement Count</button>
+            <button onClick={e => dispatch(fetchUserById(payload))}>Fetch user async</button>
+            <img src= {user && user.thumbnailUrl}></img>
+            <input onChange={e => dispatch(incrementValueActionToolkit(+e.target.value))} placeholder="increment count by" type="number" />
+        </>
     )
 }
 
