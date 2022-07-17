@@ -1,25 +1,24 @@
 import React from 'react'
 import { Card, Button, Col } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addFriendUtil } from '../apiUtil';
 import "./User.scss"
+import { addFriendActionCreator, removeFriendActionCreator, addFriend, removeFriend } from '../reducers/userReducer';
 function User(props) {
-
+    const dispatch = useDispatch();
     const {friendList } = useSelector(state => state.user);
 
     const { user: { id,picture, title, firstName, lastName } } = props;
     // const { picture, title, firstName, lastName } = user
 
-    const addFriend = async()=>{
-        try {
+    const addToFreindlist = async()=>{
             const payload = {id,friendName:firstName};
-            const data = await (await addFriendUtil(payload)).data;
-            console.log(data);    
-        } catch (error) {
-            const message = error.response.data;
-            console.log(message);
-        }
-        
+            dispatch(addFriend(payload));
+    }
+
+    const removeFromFriend = async()=>{
+            const payload = {id,friendName:firstName};
+            dispatch(removeFriend(payload));
     }
 
     return (
@@ -29,8 +28,8 @@ function User(props) {
                 <img src={picture} />
                 <div className = "data">
                     <strong>{title.toUpperCase()} {firstName} {lastName}</strong>
-                    {friendList.includes(id)?<Button className = "data__button" variant="outline-danger" onClick = {addFriend}>Remove Friend</Button>:
-                    <Button className = "data__button" variant="outline-primary" onClick = {addFriend}>Add Friend</Button>
+                    {friendList.includes(id)?<Button className = "data__button" variant="outline-danger" onClick = {removeFromFriend}>Remove Friend</Button>:
+                    <Button className = "data__button" variant="outline-primary" onClick = {addToFreindlist}>Add Friend</Button>
                     }
                 </div>
             </Card.Body>

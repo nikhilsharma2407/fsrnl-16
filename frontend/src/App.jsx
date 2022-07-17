@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import MyComponent from './MyComponent/MyComponent';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -31,8 +31,7 @@ function App() {
 
 
   const dispatch = useDispatch();
-  const {isLoggedIn,message,status} = useSelector(state=>state.user);
-
+  const {isLoggedIn,userloading,loading,message,status} = useSelector(state=>state.user);
   useEffect(() => {
     // (async()=>{
     //   try {
@@ -71,11 +70,11 @@ function App() {
           <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
           <Route path='/flex' element={<Flexbox />} />
           {/* <Route path='/users' element={<Users />} /> */}
-          <Route path='/users' element={
+          {userloading===false?<Route path='/users' element={
             <ProtectedRoute isLoggedIn = {isLoggedIn}>
               <Users/>
             </ProtectedRoute>
-          } />
+          } />:null}
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />

@@ -104,3 +104,60 @@ jwt expired /user/login GET
 jwt expired /user/login GET
 jwt expired /user/login GET
 jwt expired /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+Incorrect Password!!! /user/login POST
+jwt must be provided /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+jwt must be provided /user/login GET
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+User doesn't exist /user/login POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+Incorrect Password!!! /user/login POST
+Incorrect Password!!! /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+User doesn't exist /user/login POST
+jwt expired /user/login GET
+Incorrect Password!!! /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+User doesn't exist /user/login POST
+Invalid status code: ResponseCreator {
+  status: true,
+  message: 'Kent added to your Friends!!!'
+} /user/addFriend POST
+Invalid status code: ResponseCreator {
+  status: true,
+  message: 'Sara added to your Friends!!!'
+} /user/addFriend POST
+jwt expired /user/login GET
+jwt expired /user/removeFriend POST
+jwt expired /user/login GET
+Incorrect Password!!! /user/login POST
+Incorrect Password!!! /user/login POST
+Incorrect Password!!! /user/login POST

@@ -139,7 +139,7 @@ userSchema.statics.addFriend = async (req,res,next)=>{
         console.log(data);
         res.status(200);
         if(data.modifiedCount){
-            res.send(new ResponseCreator(200, `${friendName} added to your Friends!!!`));
+            res.send(new ResponseCreator(200, `${friendName} added to your Friends!!!`,id));
         }    
     } catch (error) {
         next(error);
@@ -154,7 +154,7 @@ userSchema.statics.removeFriend = async (req,res,next)=>{
         console.log(data);
         res.status(200)
         if(data.modifiedCount){
-            res.send(new ResponseCreator(200, `You're no longer friends with ${friendName}`));
+            res.send(new ResponseCreator(200, `You're no longer friends with ${friendName}`,id));
         }    
     } catch (error) {
         next(error);
