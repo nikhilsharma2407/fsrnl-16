@@ -132,7 +132,7 @@ const userReducer = (state = initialState,action)=>{
             return {...state,message,friendList:friendList.filter(id=>id!==data)};
             
         case USER_ACTIONS.LOGOUT:
-            return initialState
+            return {...initialState,userloading:false}
     
         default:
             return state

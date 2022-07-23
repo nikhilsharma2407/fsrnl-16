@@ -4,29 +4,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginCookieUtil, loginUtil } from '../apiUtil';
 import { loginAction } from '../reducers/userReducer';
 import "./Login.scss"
+import { useLocation, useNavigate } from 'react-router';
 
 function Login() {
 
 
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [isLoggedIn, setisLoggedIn] = useState(false)
   const [valid, setvalid] = useState(false);
 
 
   const dispatch = useDispatch();
-  const state = useSelector(state => state.user)
+  const {isLoggedIn} = useSelector(state => state.user);
+  const {state:path} = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setvalid(username.length && password.length);
   }, [username, password])
 
+  useEffect(() => {
+    if(isLoggedIn){
+      navigate(path);
+    }
+
+  }, [isLoggedIn])
+  
+
+
   const login = async (e) => {
     e.preventDefault();
     const payload = { username, password };
     console.log(payload);
-    dispatch(loginAction(payload));
-
+    await dispatch(loginAction(payload));
   }
 
   return (

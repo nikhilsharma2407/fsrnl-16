@@ -76,11 +76,15 @@ function App() {
           <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
           <Route path='/flex' element={<Flexbox />} />
           {/* <Route path='/users' element={<Users />} /> */}
-          {userloading===false?<Route path='/users' element={
+          {userloading===false? <Route element = {<ProtectedRoute isLoggedIn = {isLoggedIn} />}>
+                <Route path='users' element = {<Users/>}/>
+                <Route path = 'profile' element ={<UserProfile user = {user}/>}/>
+          </Route>:null}
+          {/* {userloading===false?<Route path='/users' element={
             <ProtectedRoute isLoggedIn = {isLoggedIn}>
               <Users/>
             </ProtectedRoute>
-          } />:null}
+          } />:null} */}
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
@@ -89,13 +93,14 @@ function App() {
             <Counter/>
           </Provider>
           } />
+          {/* <Typescript name="abc"></Typescript> */}
           <Route path='/router/:userId' element={<Routing/>} />
 
-          {userloading===false?<Route path='/profile' element={
+          {/* {userloading===false?<Route path='/profile' element={
             <ProtectedRoute isLoggedIn = {isLoggedIn}>
               <UserProfile user = {user}/>
             </ProtectedRoute>
-          } />:null}
+          } />:null} */}
         </Routes>
       </BrowserRouter>
   );

@@ -27,7 +27,7 @@ export const loginCookieUtil = ()=>{
 
 export const logoutUtil = ()=>{
     const url = createURL(LOGOUT);
-    return axios.get(url);
+    return axios.get(url,{withCredentials:true});
 };
 
 export const addFriendUtil = (payload)=>{

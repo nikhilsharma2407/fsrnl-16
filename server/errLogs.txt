@@ -194,3 +194,15 @@ jwt expired /user/login GET
 jwt expired /user/login GET
 jwt expired /user/login GET
 jwt expired /user/login GET
+jwt must be provided /user/login GET
+Operation `users.findOne()` buffering timed out after 10000ms /user/login POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+Incorrect Password!!! /user/login POST
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
