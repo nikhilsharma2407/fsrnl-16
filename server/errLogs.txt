@@ -206,3 +206,9 @@ Incorrect Password!!! /user/login POST
 jwt must be provided /user/login GET
 jwt must be provided /user/login GET
 jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt must be provided /user/login GET
+jwt expired /user/login GET
+jwt expired /user/login GET

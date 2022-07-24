@@ -16,7 +16,7 @@ function Login() {
 
   const dispatch = useDispatch();
   const {isLoggedIn} = useSelector(state => state.user);
-  const {state:path} = useLocation()
+  const {state:path=''} = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {

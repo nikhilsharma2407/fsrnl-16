@@ -1,0 +1,17 @@
+.avatar {
+    &.container {
+        height: 35px;
+        width: 35px;
+        display: flex;
+        align-items: center;
+        border-radius: 100px;
+        justify-content: center;
+        background-color: green;
+    }
+
+    .name {
+        text-transform: capitalize;
+        font-weight: bold;
+        color: white;
+    }
+}

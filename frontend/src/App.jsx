@@ -28,7 +28,7 @@ import MyToast from './MyToast';
 import toolkitStore from "./store"
 import { Spinner } from 'react-bootstrap';
 import "./Counter/counter.scss"
-import UserProfile from './Counter/UserProfile/UserProfile';
+import UserProfile from './UserProfile/UserProfile';
 
 function App() {
 
