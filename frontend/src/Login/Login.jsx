@@ -25,7 +25,7 @@ function Login() {
 
   useEffect(() => {
     if(isLoggedIn){
-      navigate(path);
+      navigate(path||'');
     }
 
   }, [isLoggedIn])
