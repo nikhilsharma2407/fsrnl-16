@@ -9,15 +9,8 @@ import {
   Link,
 } from "react-router-dom";
 
-import UsersClass from './Users-test/UsersClass';
 import MyNavBar from './MyNavbar';
-import Users from './Users/Users';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Flexbox from './Flexbox/Flexbox';
-import Signup from './Signup/Signup.jsx';
-import Login from './Login/Login';
 import { loginCookieUtil } from './apiUtil';
-import Counter from './Counter/Counter';
 import { applyMiddleware, createStore } from 'redux';
 import countReducer from './reducers/CountReducer';
 import { Provider, useDispatch, useSelector } from 'react-redux';
@@ -28,15 +21,24 @@ import MyToast from './MyToast';
 import toolkitStore from "./store"
 import { Spinner } from 'react-bootstrap';
 import "./Counter/counter.scss"
-import UserProfile from './UserProfile/UserProfile';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const UsersClass = React.lazy(()=>import('./Users-test/UsersClass'));
+const Users = React.lazy(()=>import('./Users/Users')) ;
+const Flexbox = React.lazy(()=>import('./Flexbox/Flexbox')) ;
+const Signup = React.lazy(()=>import('./Signup/Signup.jsx')) ;
+const Counter = React.lazy(()=>import('./Counter/Counter')) ;
+const UserProfile = React.lazy(()=>import('./UserProfile/UserProfile')) ;
+
+const Login = React.lazy(() => import('./Login/Login'));
 
 function App() {
 
 
 
   const dispatch = useDispatch();
-  const user = useSelector(state=>state.user);
-  const {isLoggedIn,userloading,loading,message,status} = user;
+  const user = useSelector(state => state.user);
+  const { isLoggedIn, userloading, loading, message, status } = user;
   useEffect(() => {
     // (async()=>{
     //   try {
@@ -54,56 +56,88 @@ function App() {
 
   const name = "Nikhil Sharma"
   return (
-    
-      <BrowserRouter>
-      {loading?<Spinner className = "counter spinner" animation="border" />:null}
-      <MyNavBar/>
-      <MyToast status = {status} message = {message}/>
-        {/* <div >
+
+    <BrowserRouter>
+      {loading ? <Spinner className="counter spinner" animation="border" /> : null}
+      <MyNavBar />
+      <MyToast status={status} message={message} />
+      {/* <div >
           <h1>Router Link</h1>
           <Link to="/home">Home</Link>
           <Link to="/users">Users</Link>
           <Link to="/usersClass">UsersClass</Link>
         </div> */}
 
-        {/* <div >
+      {/* <div >
           <h1>Anchor</h1>
           <a href="/">Home</a>
           <a href="/users">Users</a>
         </div> */}
 
-        <Routes>
-          <Route path='/home' element={<MyComponent name={name} email="nikhil@gmail.com" />} />
-          <Route path='/flex' element={<Flexbox />} />
-          {/* <Route path='/users' element={<Users />} /> */}
-          {userloading===false? <Route element = {<ProtectedRoute isLoggedIn = {isLoggedIn} />}>
-                <Route path='users' element = {<Users/>}/>
-                <Route path = 'profile' element ={<UserProfile user = {user}/>}/>
-          </Route>:null}
-          {/* {userloading===false?<Route path='/users' element={
+      <Routes>
+        <Route path='/home' element={
+          <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+            <MyComponent name={name} email="nikhil@gmail.com" />
+          </React.Suspense>
+        } />
+        <Route path='/flex' element={<React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+          <Flexbox />
+        </React.Suspense>
+        } />
+        {/* <Route path='/users' element={<Users />} /> */}
+        {userloading === false ? <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+          <Route path='users' element={
+            <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+              <Users />
+            </React.Suspense>
+          } />
+          <Route path='profile' element={
+            <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+              <UserProfile user={user} />
+              </React.Suspense>
+            } 
+              />
+        </Route> : null}
+        {/* {userloading===false?<Route path='/users' element={
             <ProtectedRoute isLoggedIn = {isLoggedIn}>
               <Users/>
             </ProtectedRoute>
           } />:null} */}
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/usersClass' element={<UsersClass name={name} email="nikhil@gmail.com" />} />
+          <Route path='/signup' element={
+            
+            <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+            <Signup />
+            </React.Suspense>
+          } />
+          <Route path='/login' element={
+            <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+              <Login />
+            </React.Suspense>
+
+          } />
+          <Route path='/usersClass' element={
+            <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+              <UsersClass name={name} email="nikhil@gmail.com" />
+            </React.Suspense>
+          } />
           <Route path='/counter' element={
-          <Provider store={toolkitStore}>
-            <Counter/>
-          </Provider>
+            <Provider store={toolkitStore}>
+              <React.Suspense fallback={<Spinner className="counter spinner" animation="border" />}>
+                <Counter />
+              </React.Suspense>
+            </Provider>
           } />
           {/* <Typescript name="abc"></Typescript> */}
-          <Route path='/router/:userId' element={<Routing/>} />
+          <Route path='/router/:userId' element={<Routing />} />
 
           {/* {userloading===false?<Route path='/profile' element={
             <ProtectedRoute isLoggedIn = {isLoggedIn}>
               <UserProfile user = {user}/>
             </ProtectedRoute>
           } />:null} */}
-        </Routes>
-      </BrowserRouter>
-  );
-}
-
-export default App;
+      </Routes>
+    </BrowserRouter>
+      );
+    }
+    
+    export default App;
