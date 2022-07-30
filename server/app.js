@@ -14,7 +14,7 @@ const cors = require("cors");
 // used for parsing the body
 
 const corsConfig = {
-    origin: 'https://gfg-ui.herokuapp.com/',
+    origin: 'https://gfg-ui.herokuapp.com',
     credentials:true
 };
 app.use(cors(corsConfig))
