@@ -1,6 +1,6 @@
 
 import axios from "axios"
-const BASE_URL  = "http://localhost:4000/";
+const BASE_URL  = "https://gfg-server.herokuapp.com/";
 
 const SIGNUP = "user/signup";
 const LOGIN = "user/login";
