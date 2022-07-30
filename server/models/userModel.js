@@ -67,7 +67,7 @@ userSchema.statics.login = async (req, res, next) => {
                 console.log(userData);
                 // generate token
                 const token = generateToken(userData);
-                res.cookie('token',token,{httpOnly:true,maxAge:3600*1000})
+                res.cookie('token',token,{httpOnly:true,maxAge:3600*1000,sameSite:'none'})
                 // res.send({success:true,message:`user ${data.username} logged in successfully!!!`,data});
                 res.send(new ResponseCreator(200, `user ${data.username} logged in successfully!!!`, { ...data, token }));
             } else {
