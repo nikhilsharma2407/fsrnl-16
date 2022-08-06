@@ -164,7 +164,7 @@ userSchema.statics.removeFriend = async (req,res,next)=>{
 
 userSchema.statics.logout = async (req,res,next)=>{
     try {
-        res.clearCookie('token');
+        res.clearCookie('token',{sameSite:'none', secure:true});
         res.status(200);
         res.send(new ResponseCreator(200,'Logged out successfully!!!'));
     } catch (error) {
